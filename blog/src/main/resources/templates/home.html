@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список заметок</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1>Список заметок</h1>
+    <h3>Поиск</h3>
+    <p></p>
+    <p></p>
+    <p></p>
+    <form method="post" action="filter">
+        <input type="text" name="filter">
+        <button type="submit">Найти</button>
+    </form>
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <div th:each="el : ${posts}" class="alert alert-info mt-10">
+        <h3 th:text="${el.title}"/>
+        <a th:text="${el.text}"/>
+        <p></p>
+        <p></p>
+        <p></p>
+        <table >
+            <tr>
+                <td>
+                    <form th:action="'/note/' + ${el.id} + '/edit'" method="get">
+                        <button class="btn btn-warning" type="submit">Редактировать</button>
+                    </form>
+                </td>
+                <td>
+            <form th:action="'/note/' + ${el.id} + '/remove'" method="post">
+                <button class="btn btn-warning" type="submit">Удалить</button>
+            </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
